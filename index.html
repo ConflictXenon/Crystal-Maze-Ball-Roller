@@ -1,0 +1,250 @@
+<html>
+    <head>
+        <script>
+            // configuration
+            let tick = 100; // 1 second in milliseconds
+
+                // canvas
+                let canvas = false;
+                let canvasSize = 500;
+                let canvasX = Math.ceil((window.innerWidth / 2) - (canvasSize / 2));
+                let canvasY = Math.ceil(canvasSize / 2);
+
+                // ball
+                let ball = false;
+                let ballSize = 25;
+                let ballStartX = Math.ceil((canvasSize / 2) + canvasX - (ballSize / 2));
+                let ballStartY = 0 + canvasY;
+                let ballX = ballStartX;
+                let ballY = ballStartY;
+                let ballMove = true;
+                let ballMoveBy = 5;
+
+                // gutter
+                let gutterSize = 50;
+                let gutterDirectionDefault = 'right';
+                let gutterMoveBy = 5;
+
+                    // gutters
+                        let gutter1;
+                        let gutter2;
+                        let gutter3;
+                        let gutter4;
+                        let gutter5;
+                        let gutter6;
+                        let gutter7;
+                        let gutter8;
+
+                    // gutters Y
+                        let gutter1Y = gutterSize;
+                        let gutter2Y = gutterSize*2;
+                        let gutter3Y = gutterSize*3;
+                        let gutter4Y = gutterSize*4;
+                        let gutter5Y = gutterSize*5;
+                        let gutter6Y = gutterSize*6;
+                        let gutter7Y = gutterSize*7;
+                        let gutter8Y = gutterSize*8;
+
+                    // gutters X
+                        let gutter1X = gutterSize;
+                        let gutter2X = gutterSize*2;
+                        let gutter3X = gutterSize*3;
+                        let gutter4X = gutterSize*4;
+                        let gutter5X = gutterSize*5;
+                        let gutter6X = gutterSize*6;
+                        let gutter7X = gutterSize*7;
+                        let gutter8X = gutterSize*8;
+
+            // initialisation
+            window.onload = load;
+
+            // system functions
+            function load() {
+                initialise();
+                let intervalID = window.setInterval(ticker,tick);
+            }
+
+            function initialise() {
+                // canvas
+                canvas = document.getElementById('canvas');
+                canvas.style.position = 'absolute';
+                canvas.style.top = canvasX;
+                canvas.style.left = canvasY;
+                canvas.style.height = canvasSize;
+                canvas.style.width = canvasSize;
+                canvas.style.backgroundColor = '#eee';
+                canvas.style.zIndex = 0;
+
+                // ball
+                ball = document.getElementById('ball');
+                ball.style.position = 'absolute';
+                ball.style.top = ballStartY;
+                ball.style.left = ballStartX;
+                ball.style.display = 'block';
+                ball.style.height = ballSize;
+                ball.style.width = ballSize;
+                ball.style.zIndex = 10;
+
+                // gutters
+                    // gutter1
+                    gutter1 = document.createElement('div');
+                    document.body.appendChild(gutter1);
+                    gutter1.style.position = 'absolute';
+                    gutter1.style.backgroundColor = '#666';
+                    gutter1.style.height = gutterSize;
+                    gutter1.style.width = gutterSize;
+                    gutter1.style.top = canvasY + gutter1Y;
+                    gutter1.style.left = canvasX + gutter1X;
+                    gutter1.setAttribute('direction',gutterDirectionDefault);
+
+                    // gutter2
+                    gutter2 = document.createElement('div');
+                    document.body.appendChild(gutter2);
+                    gutter2.style.position = 'absolute';
+                    gutter2.style.backgroundColor = '#666';
+                    gutter2.style.height = gutterSize;
+                    gutter2.style.width = gutterSize;
+                    gutter2.style.top = canvasY + gutter2Y;
+                    gutter2.style.left = canvasX + gutter2X;
+                    gutter2.setAttribute('direction',gutterDirectionDefault);
+
+                    // gutter3
+                    gutter3 = document.createElement('div');
+                    document.body.appendChild(gutter3);
+                    gutter3.style.position = 'absolute';
+                    gutter3.style.backgroundColor = '#666';
+                    gutter3.style.height = gutterSize;
+                    gutter3.style.width = gutterSize;
+                    gutter3.style.top = canvasY + gutter3Y;
+                    gutter3.style.left = canvasX + gutter3X;
+                    gutter3.setAttribute('direction',gutterDirectionDefault);
+
+                    // gutter4
+                    gutter4 = document.createElement('div');
+                    document.body.appendChild(gutter4);
+                    gutter4.style.position = 'absolute';
+                    gutter4.style.backgroundColor = '#666';
+                    gutter4.style.height = gutterSize;
+                    gutter4.style.width = gutterSize;
+                    gutter4.style.top = canvasY + gutter4Y;
+                    gutter4.style.left = canvasX + gutter4X;
+                    gutter4.setAttribute('direction',gutterDirectionDefault);
+
+                    // gutter5
+                    gutter5 = document.createElement('div');
+                    document.body.appendChild(gutter5);
+                    gutter5.style.position = 'absolute';
+                    gutter5.style.backgroundColor = '#666';
+                    gutter5.style.height = gutterSize;
+                    gutter5.style.width = gutterSize;
+                    gutter5.style.top = canvasY + gutter5Y;
+                    gutter5.style.left = canvasX + gutter5X;
+                    gutter5.setAttribute('direction',gutterDirectionDefault);
+
+                    // gutter6
+                    gutter6 = document.createElement('div');
+                    document.body.appendChild(gutter6);
+                    gutter6.style.position = 'absolute';
+                    gutter6.style.backgroundColor = '#666';
+                    gutter6.style.height = gutterSize;
+                    gutter6.style.width = gutterSize;
+                    gutter6.style.top = canvasY + gutter6Y;
+                    gutter6.style.left = canvasX + gutter6X;
+                    gutter6.setAttribute('direction',gutterDirectionDefault);
+
+                    // gutter7
+                    gutter7 = document.createElement('div');
+                    document.body.appendChild(gutter7);
+                    gutter7.style.position = 'absolute';
+                    gutter7.style.backgroundColor = '#666';
+                    gutter7.style.height = gutterSize;
+                    gutter7.style.width = gutterSize;
+                    gutter7.style.top = canvasY + gutter7Y;
+                    gutter7.style.left = canvasX + gutter7X;
+                    gutter7.setAttribute('direction',gutterDirectionDefault);
+
+                    // gutter8
+                    gutter8 = document.createElement('div');
+                    document.body.appendChild(gutter8);
+                    gutter8.style.position = 'absolute';
+                    gutter8.style.backgroundColor = '#666';
+                    gutter8.style.height = gutterSize;
+                    gutter8.style.width = gutterSize;
+                    gutter8.style.top = canvasY + gutter8Y;
+                    gutter8.style.left = canvasX + gutter8X;
+                    gutter8.setAttribute('direction',gutterDirectionDefault);
+            }
+
+            function ticker() {
+                moveBall();
+                moveGutter(gutter1);
+                moveGutter(gutter2);
+                moveGutter(gutter3);
+                moveGutter(gutter4);
+                moveGutter(gutter5);
+                moveGutter(gutter6);
+                moveGutter(gutter7);
+                moveGutter(gutter8);
+            }
+            
+            // movement functions
+            function moveBall() {
+                if(ballMove) {
+                    ballY = ballY + ballMoveBy;
+                    ball.style.top = ballY;
+                }
+            }
+
+            function moveGutter(thisGutter) {
+                let canvasLeft = canvasX;
+                let canvasRight = canvasX + canvasSize;
+                let thisGutterLeft = parseInt(thisGutter.style.left,10);
+                let thisGutterRight = thisGutterLeft + gutterSize;
+                let direction = thisGutter.getAttribute('direction');
+
+                if(direction == 'right') {
+                    let newGutterRight = thisGutterRight + gutterMoveBy;
+                    if(newGutterRight > canvasRight) {
+                        thisGutter.setAttribute('direction','left');
+                    } else {
+                        thisGutter.style.left = thisGutterLeft + gutterMoveBy;
+                    }
+                }
+                if(direction == 'left') {
+                    let newGutterLeft = thisGutterLeft - gutterMoveBy;
+                    if(newGutterLeft < canvasLeft) {
+                        thisGutter.setAttribute('direction','right');
+                    } else {
+                        thisGutter.style.left = newGutterLeft;
+                    }
+                }
+            }
+
+            // control functions
+            function startStopBall() {
+                ballMove = (ballMove) ? false : true;
+            }
+
+            function resetBall() {
+                ballX = ballStartX;
+                ballY = ballStartY;
+            }
+        </script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <img
+            id="ball"
+            src="ball.png"
+        />
+        <button onclick="startStopBall()">
+            Start / Stop
+        </button>
+        <button onclick="resetBall()">
+            Reset
+        </button>
+
+        <div id="canvas"></div>
+    </body>
+</html>
