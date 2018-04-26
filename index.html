@@ -2,13 +2,13 @@
     <head>
         <script>
             // configuration
-            let tick = 100; // 1 second in milliseconds
+            let tick = 10; // milliseconds
 
                 // canvas
                 let canvas = false;
                 let canvasSize = 500;
                 let canvasX = Math.ceil((window.innerWidth / 2) - (canvasSize / 2));
-                let canvasY = Math.ceil(canvasSize / 2);
+                let canvasY = 100;
 
                 // ball
                 let ball = false;
@@ -68,8 +68,8 @@
                 // canvas
                 canvas = document.getElementById('canvas');
                 canvas.style.position = 'absolute';
-                canvas.style.top = canvasX;
-                canvas.style.left = canvasY;
+                canvas.style.top = canvasY;
+                canvas.style.left = canvasX;
                 canvas.style.height = canvasSize;
                 canvas.style.width = canvasSize;
                 canvas.style.backgroundColor = '#eee';
