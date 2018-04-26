@@ -1,0 +1,69 @@
+- ball to only start dropping when we tell it to
+- once ball is moving, each frame it should assess whether it is in a supported area or not
+    - if it is, then continue
+    - if it is not, then error / gameover / reset
+
+- how to define what is a supported area
+    - an array of supported areas
+        per area
+            - x0 to xMax
+            - y0 to yMax
+
+supported area definition
+- gutter top left
+- use width to infer other corners
+
+ball area calculation
+- ball top left
+- use width to infer other corners (top right, bottom left, bottom right)
+
+supported area calculation (SATRP = supported area top right pixel, BTLP = ball top left pixel)
+- is BTLP:
+    - both
+        - BTLP left <= SABRP left
+        - BTLP top <= SABRP top
+- is BTRP:
+    - both
+        - BTRP left => SABLP left
+        - BTRP top <= SABLP top
+is BBLP:
+    - both
+        - BBLP left <= SATRP left
+        - BBLP top >= SATRP top
+is BBRP:
+    - both
+        - BBRP left >= SATLP left
+        - BBRP top >= SATLP top
+        
+        
+        
+need to know the left and top for every gutter corner, and every ball corner
+
+gutter1
+    topleft:
+        left: 0
+        top: 0
+    topright:
+        left: 0
+        top: 0
+    bottomleft:
+        left: 0
+        top: 0
+    bottomright:
+        left: 7
+        top: 60
+        
+ball
+    topleft:
+        left: 5
+        top: 20
+    topright:
+        left: 0
+        top: 0
+    bottomleft:
+        left: 0
+        top: 0
+    bottomright:
+        left: 0
+        top: 0
+    
