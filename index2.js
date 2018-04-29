@@ -1,5 +1,5 @@
 // configuration
-let tick = 500; // milliseconds
+let tick = 50; // milliseconds
 let ballMove = true;
 let ballMoveBy = 5;
 let ballSize = 25;
@@ -114,52 +114,64 @@ function testBall() {
 
         // ball top left
         if(
+            // gutter top left corner
+            ball.topLeft.left >= gutter.topLeft.left
+            &&
+            ball.topLeft.top >= gutter.topLeft.top
+
+            &&
+            // gutter bottom right corner
             ball.topLeft.left <= gutter.bottomRight.left
-            && 
-            ball.topLeft.left >= gutter.bottomLeft.left
             &&
             ball.topLeft.top <= gutter.bottomRight.top
-            &&
-            ball.topLeft.top >= gutter.bottomLeft.top
         ) {
             ballTest = true;
         }
             
         // ball top right
         if(
-            ball.topRight.left >= gutter.bottomLeft.left
+            // gutter top left corner
+            ball.topRight.left >= gutter.topLeft.left
             &&
+            ball.topRight.top >= gutter.topLeft.top
+
+            &&
+            // gutter bottom right corner
             ball.topRight.left <= gutter.bottomRight.left
             &&
-            ball.topRight.top <= gutter.bottomLeft.top
-            &&
-            ball.topRight.top >= gutter.bottomRight.top
+            ball.topRight.top <= gutter.bottomRight.top
         ) {
             ballTest = true;
         }
 
         // ball bottom left
         if(
-            ball.bottomLeft.left <= gutter.topRight.left
-            &&
+            // gutter top left corner
             ball.bottomLeft.left >= gutter.topLeft.left
             &&
-            ball.bottomLeft.top >= gutter.topRight.top
+            ball.bottomLeft.top >= gutter.topLeft.top
+
             &&
-            ball.bottomLeft.top <= gutter.topLeft.top
+            // gutter bottom right corner
+            ball.bottomLeft.left <= gutter.bottomRight.left
+            &&
+            ball.bottomLeft.top <= gutter.bottomRight.top
         ) {
             ballTest = true;
         }
 
         // ball bottom right
         if(
+            // gutter top left corner
             ball.bottomRight.left >= gutter.topLeft.left
             &&
-            ball.bottomRight.left <= gutter.topRight.left
-            &&
             ball.bottomRight.top >= gutter.topLeft.top
+
             &&
-            ball.bottomRight.top <= gutter.topRight.top
+            // gutter bottom right corner
+            ball.bottomRight.left <= gutter.bottomRight.left
+            &&
+            ball.bottomRight.top <= gutter.bottomRight.top
         ) {
             ballTest = true;
         }
